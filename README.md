@@ -29,10 +29,6 @@ This is a simple Hangman game built using Python and Tkinter. The player tries t
 
    python app.py
 
-## Screenshots
-
-(Add screenshots of the game interface here)
-
 ## Future Improvements
 
 - Add graphical representation of the Hangman
