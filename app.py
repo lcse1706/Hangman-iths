@@ -30,6 +30,7 @@ def restart_game():
 # GUI setup
 root = tk.Tk()
 root.title("Hangman Game")
+root.geometry("400x450")
 
 word_display = tk.StringVar()
 hangman_label = tk.Label(root, text=get_hangman_stage(), font=("Courier", 12))
