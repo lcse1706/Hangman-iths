@@ -1,59 +1,34 @@
 import tkinter as tk
-import random
+import game_logic as gl 
 
-WORDS = ["python", "tkinter", "developer", "hangman", "programming", "code", "computer", "software", "django", "javascript"]
-word = random.choice(WORDS).lower()
-guessed_letters = set()
-attempts = 6
-
-def update_word_display():
-    displayed = " ".join([letter if letter in guessed_letters else "_" for letter in word])
-    word_display.set(displayed)
+def update_ui():
+    word_display.set(gl.update_display_word())
+    attempts_label.config(text=f"Attempts left: {gl.attempts}")
 
 def check_letter(event):
-    global attempts
     letter = entry.get().lower()
     entry.delete(0, tk.END)
 
-    if len(letter) != 1 or not letter.isalpha():
-        message_label.config(text="Enter a single letter!")
-        return
+    message = gl.check_letter(letter)
+    message_label.config(text=message)
 
-    if letter in guessed_letters:
-        message_label.config(text="You already guessed that letter!")
-        return
+    update_ui()
 
-    guessed_letters.add(letter)
-
-    if letter in word:
-        message_label.config(text="Correct!")
-    else:
-        attempts -= 1
-        message_label.config(text="Wrong!")
-
-    update_word_display()
-    attempts_label.config(text=f"Attempts left: {attempts}")
-
-    if "_" not in word_display.get():
+    if gl.is_won():
         message_label.config(text="You won!")
-    elif attempts == 0:
-        message_label.config(text=f"Game Over! Word was: {word}")
+    elif gl.is_lost():
+        message_label.config(text=f"Game Over! Word was: {gl.word}")
 
 def restart_game():
-    global word, guessed_letters, attempts
-    word = random.choice(WORDS).lower()
-    guessed_letters.clear()
-    attempts = 6
-    update_word_display()
-    attempts_label.config(text=f"Attempts left: {attempts}")
+    gl.initialize_game()
     message_label.config(text="")
+    update_ui()
 
 # GUI setup
 root = tk.Tk()
 root.title("Hangman Game")
 
 word_display = tk.StringVar()
-update_word_display()
 
 label = tk.Label(root, textvariable=word_display, font=("Arial", 20))
 label.pack(pady=20)
@@ -65,10 +40,12 @@ entry.bind("<Return>", check_letter)
 message_label = tk.Label(root, text="", font=("Arial", 14))
 message_label.pack(pady=10)
 
-attempts_label = tk.Label(root, text=f"Attempts left: {attempts}", font=("Arial", 14))
+attempts_label = tk.Label(root, text=f"Attempts left: {gl.attempts}", font=("Arial", 14))  
 attempts_label.pack()
 
 restart_button = tk.Button(root, text="Restart", command=restart_game, font=("Arial", 14))
 restart_button.pack(pady=10)
+
+update_ui()
 
 root.mainloop()
