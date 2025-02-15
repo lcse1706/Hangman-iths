@@ -2,7 +2,7 @@
 
 ## Description
 
-This is a simple Hangman game built using Python and Tkinter. The player tries to guess the hidden word by entering letters. The game provides feedback on correct and incorrect guesses and tracks the number of remaining attempts.
+This is a simple Hangman game built using Python and Tkinter. The player tries to guess the hidden word by entering letters. The game provides feedback on correct and incorrect guesses and tracks the number of remaining attempts. The game also visually represents the hangman figure, updating as incorrect letters are guessed.
 
 ## Features
 
@@ -10,6 +10,7 @@ This is a simple Hangman game built using Python and Tkinter. The player tries t
 - Input validation to ensure only single letters are entered
 - Tracks guessed letters and remaining attempts
 - Displays a message when the game is won or lost
+- Visual representation of the hangman figure
 - Restart button to start a new game
 
 ## Requirements
@@ -21,9 +22,8 @@ This is a simple Hangman game built using Python and Tkinter. The player tries t
 
 1. Clone this repository:
 
-   git clone https://github.com/lcse1706/Hangman-iths.git
-
-   cd Hangman-iths
+   git clone https://github.com/yourusername/hangman-tkinter.git
+   cd hangman-tkinter
 
 2. Run the script:
 
@@ -31,6 +31,6 @@ This is a simple Hangman game built using Python and Tkinter. The player tries t
 
 ## Future Improvements
 
-- Add graphical representation of the Hangman
+- Add more difficulty levels
 - Use an external word list or API for more words
 - Enhance UI with more styling
