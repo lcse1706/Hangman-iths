@@ -1,6 +1,73 @@
 import random
 
 WORDS = ["python", "tkinter", "developer", "hangman", "programming", "code", "computer", "software", "django", "javascript"]
+
+HANGMAN_PICS = [
+    r"""
+       +---+
+       |   |
+           |
+           |
+           |
+           |
+    =========
+    """,
+    r"""
+       +---+
+       |   |
+       O   |
+           |
+           |
+           |
+    =========
+    """,
+    r"""
+       +---+
+       |   |
+       O   |
+       |   |
+           |
+           |
+    =========
+    """,
+    r"""
+       +---+
+       |   |
+       O   |
+      /|   |
+           |
+           |
+    =========
+    """,
+    r"""
+       +---+
+       |   |
+       O   |
+      /|\  |
+           |
+           |
+    =========
+    """,
+    r"""
+       +---+
+       |   |
+       O   |
+      /|\  |
+      /    |
+           |
+    =========
+    """,
+    r"""
+       +---+
+       |   |
+       O   |
+      /|\  |
+      / \  |
+           |
+    =========
+    """
+]
+
 guessed_letters = set()
 attempts = 6
 word = ""
@@ -31,10 +98,14 @@ def check_letter(letter):
         attempts -= 1
         return "Wrong!"
 
+def get_hangman_stage():
+    return HANGMAN_PICS[6 - attempts]
+
 def is_won():
     return "_" not in update_display_word()
 
 def is_lost():
     return attempts == 0
 
+# Inicjalizacja gry na start
 initialize_game()
