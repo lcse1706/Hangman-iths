@@ -1,15 +1,14 @@
 import tkinter as tk
-from game_logic import *
+from game_logic import initialize_game, update_display_word, check_letter, get_hangman_stage, is_won, is_lost, game_state
 
 initialize_game()
 
 def update_ui():
     word_display.set(update_display_word())
     hangman_label.config(text=get_hangman_stage())
-    attempts_label.config(text=f"Attempts left: {attempts}")
+    attempts_label.config(text=f"Attempts left: {game_state['attempts']}")
 
 def check_letter_event(event):
-    global attempts
     letter = entry.get().lower()
     entry.delete(0, tk.END)
 
@@ -21,7 +20,7 @@ def check_letter_event(event):
     if is_won():
         message_label.config(text="You won!")
     elif is_lost():
-        message_label.config(text=f"Game Over! Word was: {word}")
+        message_label.config(text=f"Game Over! Word was: {game_state['word']}")
 
 def restart_game():
     initialize_game()
@@ -46,7 +45,7 @@ entry.bind("<Return>", check_letter_event)
 message_label = tk.Label(root, text="", font=("Arial", 14))
 message_label.pack(pady=10)
 
-attempts_label = tk.Label(root, text=f"Attempts left: {attempts}", font=("Arial", 14))
+attempts_label = tk.Label(root, text=f"Attempts left: {game_state['attempts']}", font=("Arial", 14))
 attempts_label.pack()
 
 restart_button = tk.Button(root, text="Restart", command=restart_game, font=("Arial", 14))
