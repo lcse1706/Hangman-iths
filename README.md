@@ -22,7 +22,7 @@ This is a simple Hangman game built using Python and Tkinter. The player tries t
 
 1. Clone this repository:
 
-   git clone https://github.com/lcse1706/Hangman-iths.git
+   git clone https://github.com/lcse1706/Hangman-iths.git <br>
    cd hangman-tkinter
 
 2. Run the script:
